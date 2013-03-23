@@ -939,7 +939,7 @@ main(int argc, char **argv) {
         script_assert_enabled = 0;
         is_user_initiated_recovery = 1;
         ui_set_show_text(1);
-        ui_set_background(BACKGROUND_ICON_PENGUIN);
+        ui_set_background(BACKGROUND_ICON_OUDHS);
         
         if (extendedcommand_file_exists()) {
             LOGI("Running extendedcommand...\n");
