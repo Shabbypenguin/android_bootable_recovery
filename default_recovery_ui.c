@@ -22,13 +22,13 @@
 
 char* MENU_HEADERS[] = { NULL };
 
-char* MENU_ITEMS[] = { "reboot penguins now",
-                       "install zip from sdcard",
-                       "install zip from sideload",
-                       "wipe data/factory reset",
-                       "wipe cache partition",
-                       "backup and restore",
-                       "mounts and storage",
+char* MENU_ITEMS[] = { "Reboot penguins now",
+                       "Install zip from sdcard",
+                       "Wipe data/factory reset",
+                       "Wipe cache partition",
+                       "Backup and restore",
+                       "Mounts and storage",
+                       "Reboot to Penguin Mode",
                        "PENGUINS!!",
                        NULL };
 

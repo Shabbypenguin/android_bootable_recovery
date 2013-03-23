@@ -739,6 +739,10 @@ prompt_and_wait() {
                 show_advanced_menu();
                 break;
 
+            case ITEM_PENGUIN:
+                __system("/sbin/reboot bootloader");
+                break;
+
             case ITEM_POWEROFF:
                 poweroff = 1;
                 return;

@@ -5,7 +5,7 @@ commands_recovery_local_path := $(LOCAL_PATH)
 # LOCAL_CPP_EXTENSION := .c
 
 LOCAL_SRC_FILES := \
-    recovery.c \
+    default_recovery.c \
     bootloader.c \
     install.c \
     roots.c \
@@ -33,7 +33,7 @@ RECOVERY_NAME := ClockworkMod Recovery
 LOCAL_CFLAGS += -DI_AM_KOUSH
 else
 ifndef RECOVERY_NAME
-RECOVERY_NAME := Rainbow Penguin CWM Recovery
+RECOVERY_NAME := Rainbow Penguin CWM Req0very
 endif
 endif
 
