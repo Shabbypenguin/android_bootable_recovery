@@ -22,14 +22,14 @@
 
 char* MENU_HEADERS[] = { NULL };
 
-char* MENU_ITEMS[] = { "Reboot penguins now",
+char* MENU_ITEMS[] = { "Reboot now",
                        "Install zip from sdcard",
                        "Wipe data/factory reset",
                        "Wipe cache partition",
                        "Backup and restore",
                        "Mounts and storage",
-                       "Reboot to Penguin Mode",
-                       "PENGUINS!!",
+                       "Reboot to bootloader",
+                       "Advanced",
                        NULL };
 
 void device_ui_init(UIParameters* ui_parameters) {

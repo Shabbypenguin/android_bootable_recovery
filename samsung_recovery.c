@@ -735,7 +735,7 @@ prompt_and_wait() {
                 show_advanced_menu();
                 break;
 
-            case ITEM_PENGUIN:
+            case ITEM_SPECIAL:
                 __system("/sbin/reboot download");
                 break;
 

@@ -81,7 +81,7 @@ int device_wipe_data();
 #define ITEM_APPLY_CACHE     3
 #define ITEM_NANDROID        4
 #define ITEM_PARTITION       5
-#define ITEM_PENGUIN         6
+#define ITEM_SPECIAL         6
 #define ITEM_ADVANCED        7
 #define ITEM_POWEROFF        8
 
