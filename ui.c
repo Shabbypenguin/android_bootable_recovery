@@ -80,12 +80,12 @@ static int boardRepeatableKeys[64], boardNumRepeatableKeys = 0;
 static const struct { gr_surface* surface; const char *name; } BITMAPS[] = {
     { &gBackgroundIcon[BACKGROUND_ICON_INSTALLING], "icon_installing" },
     { &gBackgroundIcon[BACKGROUND_ICON_ERROR],      "icon_error" },
-    { &gBackgroundIcon[BACKGROUND_ICON_CLOCKWORK],  "icon_clockwork" },
+    { &gBackgroundIcon[BACKGROUND_ICON_PENGUIN],  "icon_penguin" },
     { &gBackgroundIcon[BACKGROUND_ICON_FIRMWARE_INSTALLING], "icon_firmware_install" },
     { &gBackgroundIcon[BACKGROUND_ICON_FIRMWARE_ERROR], "icon_firmware_error" },
     { &gProgressBarEmpty,               "progress_empty" },
     { &gProgressBarFill,                "progress_fill" },
-    { &gBackground,                "stitch" },
+    { &gBackground,                "background" },
     { NULL,                             NULL },
 };
 
@@ -579,7 +579,7 @@ void ui_init(void)
 
 char *ui_copy_image(int icon, int *width, int *height, int *bpp) {
     pthread_mutex_lock(&gUpdateMutex);
-    draw_background_locked(gBackgroundIcon[icon]);
+    draw_background_locked(icon);
     *width = gr_fb_width();
     *height = gr_fb_height();
     *bpp = sizeof(gr_pixel) * 8;
