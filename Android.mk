@@ -32,7 +32,7 @@ RECOVERY_NAME := ClockworkMod Recovery
 LOCAL_CFLAGS += -DI_AM_KOUSH
 else
 ifndef RECOVERY_NAME
-RECOVERY_NAME := Rainbow Penguin CWM Req0very
+RECOVERY_NAME := OUDhs CWM Req0very
 endif
 endif
 
