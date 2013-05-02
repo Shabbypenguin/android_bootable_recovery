@@ -440,10 +440,6 @@ get_menu_selection(char** headers, char** items, int menu_only,
     int item_count = ui_start_menu(headers, items, initial_selection);
     int selected = initial_selection;
     int chosen_item = -1;
-
-    // Some users with dead enter keys need a way to turn on power to select.
-    // Jiggering across the wrapping menu is one "secret" way to enable it.
-    // We can't rely on /cache or /sdcard since they may not be available.
     int wrap_count = 0;
 
     while (chosen_item < 0 && chosen_item != GO_BACK) {
@@ -491,6 +487,21 @@ get_menu_selection(char** headers, char** items, int menu_only,
             }
         } else if (!menu_only) {
             chosen_item = action;
+        }
+
+        if (abs(selected - old_selected) > 1) {
+            wrap_count++;
+            if (wrap_count == 2) {
+                wrap_count = 0;
+                if (ui_get_rainbow_mode()) {
+                    ui_set_rainbow_mode(0);
+                    ui_print("Rainbow mode disabled\n");
+                }
+                else {
+                    ui_set_rainbow_mode(1);
+                    ui_print("Rainbow mode enabled!\n");
+                }
+            }
         }
     }
 
@@ -644,15 +655,7 @@ wipe_data(int confirm) {
         }
 
         char* items[] = { " No",
-                          " No",
-                          " No",
-                          " No",
-                          " No",
-                          " No",
-                          " No",
                           " Yes -- delete all user data",   // [7]
-                          " No",
-                          " No",
                           " No",
                           NULL };
 
