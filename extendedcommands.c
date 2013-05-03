@@ -1310,8 +1310,8 @@ void show_advanced_menu()
     };
 
     static char* list[] = { "reboot recovery",
+                            "power off",
                             "wipe dalvik cache",
-                            "report error",
                             "key test",
                             "show log",
                             "fix permissions",
@@ -1342,6 +1342,9 @@ void show_advanced_menu()
                 android_reboot(ANDROID_RB_RESTART2, 0, "recovery");
                 break;
             case 1:
+                __system("/sbin/reboot -p");
+                break;
+            case 2:
                 if (0 != ensure_path_mounted("/data"))
                     break;
                 ensure_path_mounted("/sd-ext");
@@ -1353,9 +1356,6 @@ void show_advanced_menu()
                     ui_print("Dalvik Cache wiped.\n");
                 }
                 ensure_path_unmounted("/data");
-                break;
-            case 2:
-                handle_failure(1);
                 break;
             case 3:
             {
