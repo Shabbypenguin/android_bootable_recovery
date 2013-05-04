@@ -183,10 +183,12 @@ Volume* volume_for_path(const char* path) {
 int try_mount(const char* device, const char* mount_point, const char* fs_type, const char* fs_options) {
     if (device == NULL || mount_point == NULL || fs_type == NULL)
         return -1;
+
     int ret = 0;
     if (fs_options == NULL) {
         ret = mount(device, mount_point, fs_type,
                        MS_NOATIME | MS_NODEV | MS_NODIRATIME, "");
+        //LOGE("ret =%d - device=%s - mount_point=%s - fstype=%s\n", ret, device, mount_point, fs_type);
     }
     else {
         char mount_cmd[PATH_MAX];
@@ -195,7 +197,23 @@ int try_mount(const char* device, const char* mount_point, const char* fs_type, 
     }
     if (ret == 0)
         return 0;
-    LOGW("failed to mount %s (%s)\n", device, strerror(errno));
+
+    //exfat support by PhilZ
+    // Copied and pasted by shabbypenguin :D
+    if (strcmp(fs_type, "vfat") == 0) {
+        char mount_cmd[PATH_MAX];
+        sprintf(mount_cmd, "mount -t exfat %s %s %s", fs_options != NULL ? fs_options : "", device, mount_point);
+        ret = __system(mount_cmd);
+        if (ret == 0) {
+            //LOGE("success: mount exfat %s %s %s\n", fs_options, device, mount_point);
+            return 0;
+        }
+        LOGI("failed to mount ext4/vfat/exfat %s %s %s\n", device, mount_point, fs_options);
+        return ret;
+    }
+    // end exfat support for sdcard
+
+    LOGW("failed to mount %s %s %s (%s)\n", device, mount_point, fs_type, strerror(errno));
     return ret;
 }
 
@@ -284,6 +302,7 @@ int ensure_path_mounted_at_mount_point(const char* path, const char* mount_point
                strcmp(v->fs_type, "ext3") == 0 ||
                strcmp(v->fs_type, "rfs") == 0 ||
                strcmp(v->fs_type, "vfat") == 0) {
+        //LOGE("main pass: %s %s %s %s\n", v->device, mount_point, v->fs_type, v->fs_type2);
         if ((result = try_mount(v->device, mount_point, v->fs_type, v->fs_options)) == 0)
             return 0;
         if ((result = try_mount(v->device2, mount_point, v->fs_type, v->fs_options)) == 0)
