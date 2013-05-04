@@ -491,7 +491,7 @@ get_menu_selection(char** headers, char** items, int menu_only,
 
         if (abs(selected - old_selected) > 1) {
             wrap_count++;
-            if (wrap_count == 2) {
+            if (wrap_count == 4) {
                 wrap_count = 0;
                 if (ui_get_rainbow_mode()) {
                     ui_set_rainbow_mode(0);
@@ -660,7 +660,7 @@ wipe_data(int confirm) {
                           NULL };
 
         int chosen_item = get_menu_selection(title_headers, items, 1, 0);
-        if (chosen_item != 7) {
+        if (chosen_item != 1) {
             return;
         }
     }
