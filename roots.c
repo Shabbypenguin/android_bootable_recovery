@@ -184,6 +184,7 @@ int try_mount(const char* device, const char* mount_point, const char* fs_type, 
     if (device == NULL || mount_point == NULL || fs_type == NULL)
         return -1;
     int ret = 0;
+#include "../../../OUDHS-addons/exfat1.c"
     if (fs_options == NULL) {
         ret = mount(device, mount_point, fs_type,
                        MS_NOATIME | MS_NODEV | MS_NODIRATIME, "");
@@ -215,8 +216,8 @@ void setup_data_media() {
         Volume* vol = device_volumes + i;
         if (strcmp(vol->fs_type, "datamedia") == 0) {
             rmdir(vol->mount_point);
-            mkdir("/data/media", 0755);
-            symlink("/data/media", vol->mount_point);
+            mkdir("/data/media/0/", 0755);
+            symlink("/data/media/0/", vol->mount_point);
             return;
         }
     }
@@ -238,7 +239,7 @@ int ensure_path_mounted_at_mount_point(const char* path, const char* mount_point
         return -1;
     }
     if (is_data_media_volume_path(path)) {
-        LOGI("using /data/media for %s.\n", path);
+        LOGI("using /data/media/0/ for %s.\n", path);
         int ret;
         if (0 != (ret = ensure_path_mounted("/data")))
             return ret;
@@ -292,6 +293,7 @@ int ensure_path_mounted_at_mount_point(const char* path, const char* mount_point
             return 0;
         if ((result = try_mount(v->device2, mount_point, v->fs_type2, v->fs_options2)) == 0)
             return 0;
+#include "../../../OUDHS-addons/exfat2.c"
         return result;
     } else {
         // let's try mounting with the mount binary and hope for the best.
