@@ -310,6 +310,7 @@ int run_script_from_buffer(char* script_data, int script_len, char* filename)
 
 
 #define EXTENDEDCOMMAND_SCRIPT "/cache/recovery/extendedcommand"
+#define POSTRECOVERY_EXIT "/sbin/postrecoveryexit.sh"
 
 int run_and_remove_extendedcommand()
 {
@@ -364,6 +365,17 @@ int extendedcommand_file_exists()
 {
     struct stat file_info;
     return 0 == stat(EXTENDEDCOMMAND_SCRIPT, &file_info);
+}
+
+int run_and_remove_postrecoveryexit()
+{
+    char tmp[PATH_MAX];
+    sprintf(tmp, "cp %s /tmp/%s", POSTRECOVERY_EXIT, basename(POSTRECOVERY_EXIT));
+    __system(tmp);
+    sprintf(tmp, "/tmp/%s", basename(POSTRECOVERY_EXIT));
+    int ret;
+
+    return __system(tmp);
 }
 
 int edify_main(int argc, char** argv) {

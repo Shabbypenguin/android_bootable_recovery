@@ -55,11 +55,15 @@ void process_volumes();
 
 int extendedcommand_file_exists();
 
+int postrecoveryexit_file_exists();
+
 void show_install_update_menu();
 
 int confirm_selection(const char* title, const char* confirm);
 
 int run_and_remove_extendedcommand();
+
+int run_and_remove_postrecoveryexit();
 
 int verify_root_and_recovery();
 

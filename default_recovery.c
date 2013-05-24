@@ -970,6 +970,9 @@ main(int argc, char **argv) {
     }
 
     verify_root_and_recovery();
+#ifdef BOARD_RECOVERY_POST_EXIT
+    run_and_remove_postrecoveryexit();
+#endif
 
     // If there is a radio image pending, reboot now to install it.
     maybe_install_firmware_update(send_intent);
