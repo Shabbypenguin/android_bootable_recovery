@@ -75,6 +75,7 @@ int device_wipe_data();
 #define ITEM_REBOOT          0
 #define ITEM_APPLY_EXT       1
 #define ITEM_APPLY_SDCARD    1  // historical synonym for ITEM_APPLY_EXT
+#define ITEM_APPLY_ZIP       1  // used for installing an update from a zip
 #define ITEM_WIPE_DATA       2
 #define ITEM_WIPE_CACHE      3
 // unused in cwr
@@ -101,5 +102,8 @@ void
 set_sdcard_update_bootloader_message();
 
 extern int ui_handle_key(int key, int visible);
+
+// call a clean reboot
+void reboot_main_system(int cmd, int flags, char *arg);
 
 #endif
