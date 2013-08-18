@@ -19,6 +19,7 @@ LOCAL_SRC_FILES := \
     prop.c \
     default_recovery_ui.c \
     adb_install.c \
+    default_recovery.c \
     verifier.c
 
 ADDITIONAL_RECOVERY_FILES := $(shell echo $$ADDITIONAL_RECOVERY_FILES)
@@ -37,7 +38,7 @@ RECOVERY_NAME := OUDhs CWM Touch Req0very
 endif
 endif
 
-RECOVERY_VERSION := $(RECOVERY_NAME) v1.0.3.5
+RECOVERY_VERSION := $(RECOVERY_NAME) v1.0.3.6
 
 LOCAL_CFLAGS += -DRECOVERY_VERSION="$(RECOVERY_VERSION)"
 RECOVERY_API_VERSION := 2
@@ -83,12 +84,6 @@ ifeq ($(BOARD_CUSTOM_RECOVERY_KEYMAPPING),)
   LOCAL_SRC_FILES += default_recovery_keys.c
 else
   LOCAL_SRC_FILES += $(BOARD_CUSTOM_RECOVERY_KEYMAPPING)
-endif
-
-ifeq ($(BOARD_VENDOR),samsung)
-  LOCAL_SRC_FILES += default_recovery.c
-else
-  LOCAL_SRC_FILES += samsung_recovery.c
 endif
 
 LOCAL_STATIC_LIBRARIES += libmake_ext4fs libext4_utils_static libz libsparse_static
